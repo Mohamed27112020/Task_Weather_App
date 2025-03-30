@@ -1,19 +1,17 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:chat_1_app/Cubit/RegisterCubit/register_cubit.dart';
-import 'package:chat_1_app/Cubit/RegisterCubit/register_state.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_weather_app/Component/Custombutton.dart';
+import 'package:task_weather_app/Component/Shaed.dart';
+import 'package:task_weather_app/Component/customtextfiled.dart';
+import 'package:task_weather_app/Cubit/RegisterCubit/register_cubit.dart';
+import 'package:task_weather_app/Cubit/RegisterCubit/register_state.dart';
+import 'package:task_weather_app/pages/home_page.dart';
+
 import '../Component/Constant.dart';
-import '../Component/Custombutton.dart';
-import '../Component/Shaed.dart';
-import '../Component/customtextfiled.dart';
-import 'Home.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({super.key});
-  CollectionReference user = FirebaseFirestore.instance.collection('users');
+
   GlobalKey<FormState> formkey = GlobalKey();
   TextEditingController namecontroller = TextEditingController();
   TextEditingController emailcontroller = TextEditingController();
@@ -29,11 +27,14 @@ class RegisterPage extends StatelessWidget {
           showSnackbar(context, 'Loading Register', Colors.grey);
         } else if (state is RegisterSucces) {
           showSnackbar(context, 'Success Register', Colors.green);
-          await Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return HomePage(
-              email: email!,
-            );
-          }));
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return HomePage();
+              },
+            ),
+          );
         } else if (state is RegisterFailure) {
           showSnackbar(context, 'Failure Register', Colors.red);
         }
@@ -48,19 +49,8 @@ class RegisterPage extends StatelessWidget {
                 key: formkey,
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Image.asset(
-                      'assets/images/scholar.png',
-                      width: 120,
-                      height: 120,
-                      scale: 1,
-                      fit: BoxFit.cover,
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
+                
+                    SizedBox(height: 100),
                     Text(
                       'Register ',
                       style: TextStyle(
@@ -69,21 +59,8 @@ class RegisterPage extends StatelessWidget {
                         color: Colors.yellow,
                       ),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    customTextField(
-                      controller: namecontroller,
-                      keyboardType: TextInputType.emailAddress,
-                      obscureText: false,
-                      hinttext: 'Name',
-                      onchange: (data) {
-                        name = data;
-                      },
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    SizedBox(height: 50),
+                    
                     customTextField(
                       controller: emailcontroller,
                       keyboardType: TextInputType.emailAddress,
@@ -93,9 +70,7 @@ class RegisterPage extends StatelessWidget {
                         email = data;
                       },
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    SizedBox(height: 10),
                     customTextField(
                       controller: passwordcontroller,
                       keyboardType: TextInputType.visiblePassword,
@@ -105,33 +80,20 @@ class RegisterPage extends StatelessWidget {
                         password = data;
                       },
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    SizedBox(height: 40),
                     custombutton(
                       onPressed: () async {
                         if (formkey.currentState!.validate()) {
-                          await BlocProvider.of<RegisterCubit>(context)
-                              .Registerfun(
-                                  email: email!,
-                                  password: password!,
-                                  name: name!,
-                                  context: context);
-                          await user.add({
-                            'email': email,
-                            'name': name!,
-                            'password':password!,
-                          });
+                          await BlocProvider.of<RegisterCubit>(
+                            context,
+                          ).Registerfun(email: email!, password: password!);
                         }
-                        namecontroller.clear();
                         emailcontroller.clear();
                         passwordcontroller.clear();
                       },
                       namebutton: 'Register',
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    SizedBox(height: 20),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,

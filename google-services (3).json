@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "255980536990",
-    "project_id": "chat1app-a6c6a",
-    "storage_bucket": "chat1app-a6c6a.firebasestorage.app"
+    "project_number": "516982999814",
+    "project_id": "weatherappauth-9b2f9",
+    "storage_bucket": "weatherappauth-9b2f9.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:255980536990:android:8ed80e89eaa3e320e9e78f",
+        "mobilesdk_app_id": "1:516982999814:android:dcc57e25dcaf620ddcec87",
         "android_client_info": {
-          "package_name": "com.example.chat_1_app"
+          "package_name": "com.example.task_weather_app"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCFJKrIBaNmq1EXu1l53AJv6JWa-5Jp8Ac"
+          "current_key": "AIzaSyCBnTJlYLJN2lKmKdfgKBYJH1whYMCsF2M"
         }
       ],
       "services": {

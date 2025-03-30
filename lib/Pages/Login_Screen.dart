@@ -1,21 +1,17 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:chat_1_app/Component/Custombutton.dart';
-import 'package:chat_1_app/Component/Shaed.dart';
-import 'package:chat_1_app/Component/customtextfiled.dart';
-import 'package:chat_1_app/Cubit/LoginCubit/login_cubit.dart';
-import 'package:chat_1_app/Cubit/RegisterCubit/register_cubit.dart';
-import 'package:chat_1_app/Pages/Home.dart';
-import 'package:chat_1_app/Pages/Register_Screen.dart';
-import 'package:chat_1_app/model/message.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:task_weather_app/Component/Custombutton.dart';
+import 'package:task_weather_app/Component/Shaed.dart';
+import 'package:task_weather_app/Component/customtextfiled.dart';
+import 'package:task_weather_app/Cubit/LoginCubit/login_cubit.dart';
+import 'package:task_weather_app/pages/Register_Screen.dart';
+import 'package:task_weather_app/pages/home_page.dart';
 
 import '../Component/Constant.dart';
 import '../Cubit/LoginCubit/login_state.dart';
@@ -27,11 +23,8 @@ class Login_Page extends StatelessWidget {
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   String? email;
-  String? userName;
-  CollectionReference user = FirebaseFirestore.instance.collection('users');
+
   String? password;
-  CollectionReference messages =
-      FirebaseFirestore.instance.collection(kCMessages);
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +36,15 @@ class Login_Page extends StatelessWidget {
           showSnackbar(context, 'Loading login', Colors.grey);
         } else if (state is LoginSucces) {
           showSnackbar(context, 'Sucsses login', Colors.green);
-        
-          await Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return HomePage(
-              email: email!,
-            );
-          }));
+
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return HomePage();
+              },
+            ),
+          );
         } else if (state is LoginFailure) {
           showSnackbar(context, 'failure login ', Colors.red);
         }
@@ -57,25 +53,13 @@ class Login_Page extends StatelessWidget {
         return Scaffold(
           backgroundColor: Kprimarycolor,
           body: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: SingleChildScrollView(
               child: Form(
                 key: formkey,
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Image.asset(
-                      'assets/images/scholar.png',
-                      width: 120,
-                      height: 120,
-                      scale: 1,
-                      fit: BoxFit.cover,
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    const SizedBox(height: 100),
                     const Text(
                       'LOGIN',
                       style: TextStyle(
@@ -84,9 +68,7 @@ class Login_Page extends StatelessWidget {
                         color: Colors.yellow,
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 50),
                     customTextField(
                       controller: emailcontroller,
                       keyboardType: TextInputType.emailAddress,
@@ -96,9 +78,7 @@ class Login_Page extends StatelessWidget {
                         email = data;
                       },
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     customTextField(
                       controller: passwordcontroller,
                       keyboardType: TextInputType.visiblePassword,
@@ -108,25 +88,20 @@ class Login_Page extends StatelessWidget {
                         password = data;
                       },
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 30),
                     custombutton(
                       namebutton: 'Login',
                       onPressed: () async {
                         if (formkey.currentState!.validate()) {
-                          await BlocProvider.of<LoginCubit>(context).loginfun(
-                              email: email!,
-                              password: password!,
-                              context: state);
+                          await BlocProvider.of<LoginCubit>(
+                            context,
+                          ).loginfun(email: email!, password: password!);
                         }
                         passwordcontroller.clear();
                         emailcontroller.clear();
                       },
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    const SizedBox(height: 20),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -134,11 +109,14 @@ class Login_Page extends StatelessWidget {
                         const Text("Don't have account ? "),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: ((context) {
-                                return RegisterPage();
-                              }),
-                            ));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: ((context) {
+                                  return RegisterPage();
+                                }),
+                              ),
+                            );
                           },
                           child: const Text(
                             "Register ",

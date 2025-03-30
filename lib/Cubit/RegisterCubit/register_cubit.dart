@@ -1,20 +1,20 @@
 import 'package:bloc/bloc.dart';
-import 'package:chat_1_app/Cubit/RegisterCubit/register_state.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+import 'package:task_weather_app/Cubit/RegisterCubit/register_state.dart';
+
 
 import '../../Component/Shaed.dart';
-import '../../Pages/Home.dart';
+
 
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
- String na = '';
+ 
   Future<void> Registerfun(
       {context,
       required String email,
-      required String password,
-      required String name}) async {
+      required String password,}) async {
     emit(RegisterLoading());
     try {
       final credential =

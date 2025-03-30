@@ -4,36 +4,35 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, TargetPlatform;
 
-/// Default [FirebaseOptions] for use with your Firebase apps.
-///
-/// Example:
-/// ```dart
-/// import 'firebase_options.dart';
-/// // ...
-/// await Firebase.initializeApp(
-///   options: DefaultFirebaseOptions.currentPlatform,
-/// );
-/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     // ignore: missing_enum_constant_in_switch
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
+      case TargetPlatform.fuchsia:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case TargetPlatform.iOS:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case TargetPlatform.linux:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case TargetPlatform.macOS:
+        // TODO: Handle this case.
+        throw UnimplementedError();
+      case TargetPlatform.windows:
+        // TODO: Handle this case.
+        throw UnimplementedError();
     }
-
-    throw UnsupportedError(
-      'DefaultFirebaseOptions are not supported for this platform.',
-    );
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC1WgbRVYvzPG1UuM2Q9AJ_Z9Y-C6DykEw',
-    appId: '1:1046617815837:android:8999b9dec0d74a55043ff4',
-    messagingSenderId: '1046617815837',
-    projectId: 'chat-app-d17c9',
-    storageBucket: 'chat-app-d17c9.appspot.com',
+    apiKey: 'AIzaSyCBnTJlYLJN2lKmKdfgKBYJH1whYMCsF2M',
+    appId: '1:516982999814:android:dcc57e25dcaf620ddcec87',
+    messagingSenderId: '516982999814',
+    projectId: 'weatherappauth-9b2f9',
+    storageBucket: 'weatherappauth-9b2f9.appspot.com',
   );
-
- 
 }

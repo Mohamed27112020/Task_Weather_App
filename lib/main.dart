@@ -1,51 +1,64 @@
-import 'package:chat_1_app/Cubit/LoginCubit/login_cubit.dart';
-import 'package:chat_1_app/Cubit/RegisterCubit/register_cubit.dart';
-import 'package:chat_1_app/Cubit/cubit/chat_cubit.dart';
-import 'package:chat_1_app/Pages/Thome.dart';
-import 'package:chat_1_app/testchatbubble.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'Pages/Home.dart';
-import 'Pages/Login_Screen.dart';
+import 'package:task_weather_app/Cubit/LoginCubit/login_cubit.dart';
+import 'package:task_weather_app/Cubit/RegisterCubit/register_cubit.dart';
+import 'package:task_weather_app/Cubit/Weather_cubit.dart';
+import 'package:task_weather_app/pages/Login_Screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-    apiKey: 'AIzaSyCFJKrIBaNmq1EXu1l53AJv6JWa-5Jp8Ac',
-    messagingSenderId: '255980536990',
-    projectId: 'chat1app-a6c6a',
-    appId: '1:255980536990:android:8ed80e89eaa3e320e9e78f',
-  ));
-
-  runApp(const MyApp());
+    options: FirebaseOptions(
+      apiKey: 'AIzaSyCBnTJlYLJN2lKmKdfgKBYJH1whYMCsF2M',
+      appId: '1:516982999814:android:dcc57e25dcaf620ddcec87',
+      messagingSenderId: '516982999814',
+      projectId: 'weatherappauth-9b2f9',
+    ),
+  );
+  runApp(
+    BlocProvider(
+      create: (context) {
+        return WeatherCubit();
+      },
+      child: DevicePreview(
+        enabled: !kReleaseMode,
+        builder: (BuildContext context) {
+          return WeatherApp();
+        },
+      ),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class WeatherApp extends StatelessWidget {
+  WeatherApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: [
-            BlocProvider(
-          create: (context) => LoginCubit(),
+      providers: [
+        BlocProvider(create: (context) => WeatherCubit()),
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => RegisterCubit()),
+      ],
+      child: MaterialApp(
+        title: 'Weather',
+        theme: ThemeData(
+          primarySwatch:
+              BlocProvider.of<WeatherCubit>(context).weatherModel == null
+                  ? Colors.red
+                  : BlocProvider.of<WeatherCubit>(
+                    context,
+                  ).weatherModel!.getColorTheme(),
         ),
-            BlocProvider(
-                create: (context) => RegisterCubit(),
-            ),
-            BlocProvider(
-                create: (context) => ChatCubit(),
-            ),
-        ],
-              child: MaterialApp(
-            title: 'Chat app',
-            home: Login_Page(),
-          ),
+        debugShowCheckedModeBanner: false,
+        locale: DevicePreview.locale(context),
+        builder: DevicePreview.appBuilder,
+        home: Login_Page(),
+      ),
     );
   }
 }

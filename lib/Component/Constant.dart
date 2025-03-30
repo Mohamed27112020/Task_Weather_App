@@ -1,5 +1,3 @@
 import 'package:flutter/material.dart';
 
-const Kprimarycolor = Color(0xff2B475E);
-const kCMessages    ='messages';
-const ktime ='time';
+const Kprimarycolor = Color.fromARGB(255, 5, 54, 95);
