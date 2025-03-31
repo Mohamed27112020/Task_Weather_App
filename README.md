@@ -3,22 +3,22 @@
 A Flutter weather application that displays current weather, max/min temperatures, and supports user authentication using Firebase. Built with BLoC (Cubit) for state management.
 
 ## Getting Started
-##📱 Features
-#✔️ Real-time Weather Data (Current, Max, Min Temp)
+## 📱 Features
+# ✔️ Real-time Weather Data (Current, Max, Min Temp)
 # ✔️ User Authentication (Sign In / Sign Up with Firebase)
-#✔️ BLoC (Cubit) State Management
-#✔️ Responsive UI (Works on Android & iOS)
-#✔️ Location-Based Weather (Optional)
+# ✔️ BLoC (Cubit) State Management
+# ✔️ Responsive UI (Works on Android & iOS)
+# ✔️ Location-Based Weather (Optional)
 
-##📱 Features
-#✔️ Real-time Weather Data (Current, Max, Min Temp)
-#✔️ User Authentication (Sign In / Sign Up with Firebase)
-#✔️ BLoC (Cubit) State Management
-#✔️ Responsive UI (Works on Android & iOS)
-#✔️ Location-Based Weather (Optional)
-)
+## 📱 Features
+# ✔️ Real-time Weather Data (Current, Max, Min Temp)
+# ✔️ User Authentication (Sign In / Sign Up with Firebase)
+# ✔️ BLoC (Cubit) State Management
+# ✔️ Responsive UI (Works on Android & iOS)
+# ✔️ Location-Based Weather (Optional)
 
-##🚀 Getting Started
+
+## 🚀 Getting Started
 1. Prerequisites
 Flutter SDK (v3.0+)
 
@@ -58,19 +58,19 @@ flutter run
 
 ## 📂 Project Structure
 
-lib/
-├── cubit/          # BLoC (Cubit) State Management
-│   ├── auth/       # Auth Cubit (Login/Register)
-│   └── weather/    # Weather Cubit (Fetch Data)
+## lib/
+# ├── cubit/          #  BLoC (Cubit) State Management
+# │   ├── auth/       # Auth Cubit (Login/Register)
+# │   └── weather/    # Weather Cubit (Fetch Data)
 │
-├── models/         # Data Models (User, Weather)
-├── Component/   # Firebase & API Calls
-├── services/       # Helpers (Location, API)
-├── Pages/             # Screens & Widgets
-│   ├── auth/       # Login & Register Screens
-│   └── weather/    # Weather Display Screens
+# ├── models/         # Data Models (User, Weather)
+# ├── Component/   # Firebase & API Calls
+# ├── services/       # Helpers (Location, API)
+# ├── Pages/             # Screens & Widgets
+# │   ├── auth/       # Login & Register Screens
+# │   └── weather/    # Weather Display Screens
 │   
-├── main.dart       # App Entry Point
+# ├── main.dart       # App Entry Point
 
 ## 🔌 API Used
 OpenWeatherMap API (Docs)
